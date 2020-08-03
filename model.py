@@ -131,7 +131,6 @@ class Model(nn.Module):
         elif d_train:
             with torch.no_grad():
                 Xp = self.generate(lod, blend_factor, count=x.shape[0], noise=True)
-
             self.encoder.requires_grad_(True)
 
             _, d_result_real = self.encode(x, lod, blend_factor)
@@ -139,6 +138,7 @@ class Model(nn.Module):
             _, d_result_fake = self.encode(Xp.detach(), lod, blend_factor)
 
             loss_d = losses.discriminator_logistic_simple_gp(d_result_fake, d_result_real, x)
+
             return loss_d
         else:
             with torch.no_grad():

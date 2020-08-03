@@ -13,11 +13,12 @@ import pickle
 import random
 import argparse
 import os
-from dlutils.pytorch.cuda_helper import *
+#from dlutils.pytorch.cuda_helper import *
 import tensorflow as tf
 import imageio
 from PIL import Image
 
+from tensorflow.compat.v1 import python_io
 
 def prepare_celeba(cfg, logger, train=True):
     if train:
@@ -31,7 +32,7 @@ def prepare_celeba(cfg, logger, train=True):
     # The official way of generating CelebA-HQ can be challenging.
     # Please refer to this page: https://github.com/suvojit-0x55aa/celebA-HQ-dataset-download
     # You can get pre-generated dataset from: https://drive.google.com/drive/folders/11Vz0fqHS2rXDb5pprgTjpD7S2BAJhi1P
-    source_path = '/data/datasets/celeba-hq/data1024x1024'
+    source_path = 'data/celebahq/data1024x1024'
     for filename in tqdm.tqdm(os.listdir(source_path)):
         images.append((int(filename[:-4]), filename))
 
@@ -62,10 +63,10 @@ def prepare_celeba(cfg, logger, train=True):
 
         writers = {}
         for lod in range(cfg.DATASET.MAX_RESOLUTION_LEVEL, 1, -1):
-            tfr_opt = tf.python_io.TFRecordOptions(tf.python_io.TFRecordCompressionType.NONE)
+            tfr_opt = python_io.TFRecordOptions(python_io.TFRecordCompressionType.NONE)
             part_path = path % (lod, i)
             os.makedirs(os.path.dirname(part_path), exist_ok=True)
-            tfr_writer = tf.python_io.TFRecordWriter(part_path, tfr_opt)
+            tfr_writer = python_io.TFRecordWriter(part_path, tfr_opt)
             writers[lod] = tfr_writer
 
         for label, filename in tqdm.tqdm(celeba_folds[i]):

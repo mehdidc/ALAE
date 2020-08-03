@@ -315,7 +315,7 @@ class Encoder_old(nn.Module):
         for i in range(self.layer_count - lod - 1, self.layer_count):
             x, s1, s2 = self.encode_block[i](x)
             styles[:, 0] += s1 + s2
-
+        
         return styles
 
     def encode2(self, x, lod, blend):

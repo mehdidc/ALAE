@@ -115,10 +115,10 @@ def run(fn, defaults, description='', default_config='configs/experiment.yaml', 
         nargs=argparse.REMAINDER,
     )
 
-    import multiprocessing
-    cpu_count = multiprocessing.cpu_count()
-    os.environ["OMP_NUM_THREADS"] = str(max(1, int(cpu_count / world_size)))
-    del multiprocessing
+    # import multiprocessing
+    # cpu_count = multiprocessing.cpu_count()
+    # os.environ["OMP_NUM_THREADS"] = str(max(1, int(cpu_count / world_size)))
+    # del multiprocessing
 
     args = parser.parse_args()
 

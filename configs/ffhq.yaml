@@ -2,17 +2,12 @@
 
 NAME: ffhq
 DATASET:
-  PART_COUNT: 16
-  SIZE: 60000
-  FFHQ_SOURCE: /data/datasets/ffhq-dataset/tfrecords/ffhq/ffhq-r%02d.tfrecords
-  PATH: /data/datasets/ffhq-dataset_new/tfrecords/ffhq/splitted/ffhq-r%02d.tfrecords.%03d
-
-  PART_COUNT_TEST: 2
-  PATH_TEST: /data/datasets/ffhq-dataset_new/tfrecords/ffhq-test/splitted/ffhq-r%02d.tfrecords.%03d
-
-  SAMPLES_PATH: dataset_samples/faces/realign1024x1024
-  STYLE_MIX_PATH: style_mixing/test_images/set_ffhq
-
+  SIZE: 70000
+  SIZE_TEST: 70000
+  PATH: data/ffhq/1024
+  PATH: data/ffhq/1024
+  SAMPLES_PATH: ""
+  STYLE_MIX_PATH: ""
   MAX_RESOLUTION_LEVEL: 10
 MODEL:
   LATENT_SPACE_SIZE: 512
@@ -29,9 +24,9 @@ TRAIN:
   LEARNING_DECAY_STEPS: []
   TRAIN_EPOCHS: 300
   #                    4    8   16    32    64    128    256
-  LOD_2_BATCH_8GPU: [512, 256, 128,   64,   32,    32,    32,       32,        32] # If GPU memory ~16GB reduce last number from 32 to 24
-  LOD_2_BATCH_4GPU: [512, 256, 128,   64,   32,    32,    32,       32,        16]
-  LOD_2_BATCH_2GPU: [512, 256, 128,   64,   32,    32,    16]
-  LOD_2_BATCH_1GPU: [512, 256, 128,   64,   32,    16]
+  LOD_2_BATCH_8GPU:  [512, 256, 128,   64,   32,    32,    32,       32,        32] # If GPU memory ~16GB reduce last number from 32 to 24
+  LOD_2_BATCH_4GPU:  [512, 256, 128,   64,   32,    32,    32,       32,        16]
+  LOD_2_BATCH_2GPU:  [512, 256, 128,   64,   32,    32,    16]
+  LOD_2_BATCH_1GPU:  [512, 256, 128,   64,   32,    16]
 
   LEARNING_RATES: [0.0015,  0.0015,   0.0015,   0.0015,  0.0015,   0.0015,     0.002,     0.003,    0.003]
